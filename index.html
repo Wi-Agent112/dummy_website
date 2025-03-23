@@ -1,32 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello, Welcome to My Website</title>
-</head>
-<body>
-    <h1>Hello, Welcome to My Website</h1>
-    <p id="counter">Button clicked 0 times</p>
-    <button onclick="updateCounter()">Click Me</button>
+<script>
+    const sheetAPI = "https://script.google.com/macros/s/AKfycbw7BAYAL4AeGf_9nLiwS7Lf1_LCRcUOXDm88W1blLbia4qxz3vh2fCGIpmvIGNQWccTuA/exec"; // Replace with your actual script URL
+    const proxyURL = "https://cors-anywhere.herokuapp.com/"; // Public CORS proxy
 
-    <script>
-        const sheetAPI = "https://script.google.com/macros/s/AKfycbw7BAYAL4AeGf_9nLiwS7Lf1_LCRcUOXDm88W1blLbia4qxz3vh2fCGIpmvIGNQWccTuA/exec"; // Replace with your Web App URL
-
-        async function fetchCount() {
-            const response = await fetch(sheetAPI);
+    async function fetchCount() {
+        try {
+            const response = await fetch(proxyURL + sheetAPI);
             const count = await response.text();
             document.getElementById("counter").innerText = `Button clicked ${count} times`;
+        } catch (error) {
+            console.error("Error fetching count:", error);
+            document.getElementById("counter").innerText = "Error loading count.";
         }
+    }
 
-        async function updateCounter() {
-            const response = await fetch(sheetAPI, { method: "POST" });
+    async function updateCounter() {
+        try {
+            const response = await fetch(proxyURL + sheetAPI, { method: "POST" });
             const count = await response.text();
             document.getElementById("counter").innerText = `Button clicked ${count} times`;
+        } catch (error) {
+            console.error("Error updating count:", error);
+            alert("Failed to update the counter.");
         }
+    }
 
-        // Load count on page load
-        fetchCount();
-    </script>
-</body>
-</html>
+    fetchCount();
+</script>
