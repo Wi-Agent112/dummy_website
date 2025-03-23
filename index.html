@@ -11,32 +11,9 @@
     <button onclick="updateCounter()">Click Me</button>
 
   <script>
-    const sheetAPI = "https://script.google.com/macros/s/AKfycbw7BAYAL4AeGf_9nLiwS7Lf1_LCRcUOXDm88W1blLbia4qxz3vh2fCGIpmvIGNQWccTuA/exec"; // Replace with your actual script URL
-    const proxyURL = "https://cors-anywhere.herokuapp.com/"; // Public CORS proxy
-
-    async function fetchCount() {
-        try {
-            const response = await fetch(proxyURL + sheetAPI);
-            const count = await response.text();
-            document.getElementById("counter").innerText = `Button clicked ${count} times`;
-        } catch (error) {
-            console.error("Error fetching count:", error);
-            document.getElementById("counter").innerText = "Error loading count.";
-        }
-    }
-
-    async function updateCounter() {
-        try {
-            const response = await fetch(proxyURL + sheetAPI, { method: "POST" });
-            const count = await response.text();
-            document.getElementById("counter").innerText = `Button clicked ${count} times`;
-        } catch (error) {
-            console.error("Error updating count:", error);
-            alert("Failed to update the counter.");
-        }
-    }
-
-    fetchCount();
+      function updateCounter(){
+          alert("Hello User");
+      }
 </script>
 
 </body>
